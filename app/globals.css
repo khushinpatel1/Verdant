@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — forest */
+  --color-forest-950: #0a120a;
+  --color-forest-900: #111a11;
+  --color-forest-800: #1a2e1a;
+  --color-forest-700: #243d24;
+  --color-forest-600: #2e4d2e;
+  --color-forest-500: #3a6b3a;
+  --color-forest-400: #4d8b4d;
+
+  /* Colors — cream */
+  --color-cream-50:  #fafaf7;
+  --color-cream-100: #f4f4ee;
+  --color-cream-200: #e8e8df;
+  --color-cream-300: #d4d4c8;
+
+  /* Colors — gold */
+  --color-gold-400: #c9a84c;
+  --color-gold-300: #d4b96a;
+  --color-gold-200: #e0cd93;
+
+  /* Colors — emerald */
+  --color-emerald-accent: #50c878;
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Display font sizes */
+  --font-size-display-2xl: clamp(3rem, 8vw, 7rem);
+  --font-size-display-xl:  clamp(2.5rem, 6vw, 5rem);
+  --font-size-display-lg:  clamp(2rem, 4vw, 3.5rem);
+  --font-size-display-md:  clamp(1.5rem, 3vw, 2.5rem);
+
+  /* Spacing */
+  --spacing-18:      4.5rem;
+  --spacing-22:      5.5rem;
+  --spacing-section: 8rem;
+
+  /* Animations */
+  --animate-fade-up: fadeUp 0.6s ease forwards;
+  --animate-fade-in: fadeIn 0.4s ease forwards;
+  --animate-grain:   grain 0.5s steps(1) infinite;
+}
+
+/* Display size line-height + tracking overrides */
+.text-display-2xl { line-height: 0.95;  letter-spacing: -0.03em; }
+.text-display-xl  { line-height: 1;     letter-spacing: -0.025em; }
+.text-display-lg  { line-height: 1.05;  letter-spacing: -0.02em; }
+.text-display-md  { line-height: 1.1;   letter-spacing: -0.015em; }
+
+/* CSS custom properties */
+:root {
+  --bg-primary:    #0a120a;
+  --bg-secondary:  #111a11;
+  --bg-elevated:   #1a2e1a;
+  --text-primary:  #f4f4ee;
+  --text-secondary:#a0a898;
+  --text-muted:    #5a6b5a;
+  --accent-gold:   #c9a84c;
+  --accent-emerald:#50c878;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+::selection {
+  background-color: rgba(201, 168, 76, 0.25);
+  color: #f4f4ee;
+}
+
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2e4d2e; }
+
+/* Utility classes */
+.text-balance    { text-wrap: balance; }
+.text-secondary  { color: var(--text-secondary); }
+.text-muted-custom { color: var(--text-muted); }
+.border-subtle   { border-color: var(--border-subtle); }
+.border-medium   { border-color: var(--border-medium); }
+
+.grain-overlay { position: relative; }
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--accent-gold) 50%,
+    var(--text-primary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 2%); }
+  30%  { transform: translate(-1%, 4%); }
+  40%  { transform: translate(2%, -2%); }
+  50%  { transform: translate(-3%, 1%); }
+  60%  { transform: translate(1%, 3%); }
+  70%  { transform: translate(-2%, -1%); }
+  80%  { transform: translate(3%, -3%); }
+  90%  { transform: translate(-1%, 2%); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
