@@ -22,11 +22,8 @@ const iconMap: Record<string, React.ElementType> = {
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const fadeItem = (i: number) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease, delay: i * 0.1 },
 });
-
 export default function HomePage() {
   const { home } = site;
 
@@ -80,14 +77,11 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+          <div
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
             <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20" />
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -167,7 +161,7 @@ export default function HomePage() {
               {[home.philosophy.stat1, home.philosophy.stat2, home.philosophy.stat3].map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex items-center gap-6 p-6 rounded-xl border border-white/[0.06] bg-white/[0.02]"
+                  className="flex items-center gap-6 p-6 rounded-xl border border-white/6 bg-white/2"
                 >
                   <span className="text-4xl font-mono font-light text-gold-400 min-w-[4rem]">
                     {stat.value}
@@ -203,7 +197,7 @@ export default function HomePage() {
               >
                 <Link
                   href={product.href}
-                  className="group block h-full rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 md:p-10 hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 no-underline"
+                  className="group block h-full rounded-2xl border border-white/6 bg-white/2 p-8 md:p-10 hover:bg-white/4 hover:border-white/10 transition-all duration-300 no-underline"
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div>

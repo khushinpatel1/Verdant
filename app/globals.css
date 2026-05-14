@@ -65,10 +65,8 @@
   --border-medium: rgba(255, 255, 255, 0.12);
 }
 
-* {
+* * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html {
