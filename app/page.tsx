@@ -22,8 +22,11 @@ const iconMap: Record<string, React.ElementType> = {
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const fadeItem = (i: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease, delay: i * 0.1 },
 });
+
 export default function HomePage() {
   const { home } = site;
 
@@ -55,7 +58,7 @@ export default function HomePage() {
 
             <motion.h1
               {...fadeItem(1)}
-              className="text-display-2xl text-cream-50 whitespace-pre-line text-balance mb-8"
+              className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.03em] text-cream-50 whitespace-pre-line text-balance mb-8"
             >
               {home.hero.headline}
             </motion.h1>
@@ -77,11 +80,14 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
             <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -92,7 +98,7 @@ export default function HomePage() {
             <p className="text-xs font-mono uppercase tracking-[0.15em] text-gold-400 mb-4">
               {home.pillars.eyebrow}
             </p>
-            <h2 className="text-display-lg text-cream-50">
+            <h2 className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-cream-50">
               {home.pillars.headline}
             </h2>
           </div>
@@ -139,7 +145,7 @@ export default function HomePage() {
               <p className="text-xs font-mono uppercase tracking-[0.15em] text-gold-400">
                 {home.philosophy.eyebrow}
               </p>
-              <h2 className="text-display-lg text-cream-50 whitespace-pre-line">
+              <h2 className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-cream-50 whitespace-pre-line">
                 {home.philosophy.headline}
               </h2>
               <div className="space-y-4">
@@ -181,7 +187,7 @@ export default function HomePage() {
             <p className="text-xs font-mono uppercase tracking-[0.15em] text-gold-400 mb-4">
               {home.products.eyebrow}
             </p>
-            <h2 className="text-display-lg text-cream-50">
+            <h2 className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-cream-50">
               {home.products.headline}
             </h2>
           </div>
@@ -241,7 +247,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto space-y-6"
           >
-            <h2 className="text-display-lg text-cream-50">
+            <h2 className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-cream-50">
               {home.footerCta.headline}
             </h2>
             <p className="text-secondary text-lg leading-relaxed">

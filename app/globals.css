@@ -46,11 +46,12 @@
 }
 
 /* Display size line-height + tracking overrides */
-.text-display-2xl { line-height: 0.95;  letter-spacing: -0.03em; }
-.text-display-xl  { line-height: 1;     letter-spacing: -0.025em; }
-.text-display-lg  { line-height: 1.05;  letter-spacing: -0.02em; }
-.text-display-md  { line-height: 1.1;   letter-spacing: -0.015em; }
-
+@layer utilities {
+  .text-display-2xl { line-height: 0.95;  letter-spacing: -0.03em; }
+  .text-display-xl  { line-height: 1;     letter-spacing: -0.025em; }
+  .text-display-lg  { line-height: 1.05;  letter-spacing: -0.02em; }
+  .text-display-md  { line-height: 1.1;   letter-spacing: -0.015em; }
+}
 /* CSS custom properties */
 :root {
   --bg-primary:    #0a120a;
