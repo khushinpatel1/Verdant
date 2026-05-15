@@ -1,0 +1,77 @@
+import RevealSection from '@/components/reveal-section'
+
+const stats = [
+  {
+    num:   '0',
+    numStyle: {},
+    label: 'Third parties with access',
+    body:  'Zero. Not "we only work with trusted partners." Zero. The number doesn\'t move.',
+  },
+  {
+    num:   'E2E',
+    numStyle: { fontSize: '1.625rem', paddingTop: '5px', letterSpacing: '-0.02em' },
+    label: 'Encryption on sensitive data',
+    body:  'Always. Verdant cannot access it. Only you can. That\'s the architecture, not the marketing.',
+  },
+  {
+    num:   '∞',
+    numStyle: {},
+    label: 'Years we\'ll uphold this',
+    body:  'Not until the business model changes. Not until it\'s inconvenient. No exceptions, no fine print.',
+  },
+]
+
+export default function Philosophy() {
+  return (
+    <RevealSection className="bg-cream py-[116px] px-20">
+      <div className="grid grid-cols-2 gap-[88px] items-center">
+
+        {/* Left: pull quote */}
+        <div>
+          <p className="font-serif font-light italic text-deep tracking-[-0.025em] leading-[1.18] mb-8 text-[clamp(1.625rem,2.8vw,2.5rem)]">
+            Your data is yours.<br />
+            <strong className="not-italic font-normal text-forest">Full stop.</strong>
+          </p>
+          <p className="text-[0.9375rem] leading-[1.72] mb-5" style={{ color: '#4e5e4e' }}>
+            Most software makes a quiet bargain: use us for free, let us take everything you give us.
+            Verdant doesn't make that bargain.
+          </p>
+          <p className="text-[0.9375rem] leading-[1.72] mb-5" style={{ color: '#4e5e4e' }}>
+            What you give us stays between us. Sensitive data is end-to-end encrypted — Verdant doesn't
+            hold the keys, only you do. We have no advertising business. We sell no access. We share nothing.
+          </p>
+          <p className="text-[0.9375rem] leading-[1.72]" style={{ color: '#4e5e4e' }}>
+            This isn't a feature we added. It's the reason we exist.
+          </p>
+        </div>
+
+        {/* Right: stats */}
+        <div className="reveal-stagger">
+          {stats.map(({ num, numStyle, label, body }) => (
+            <div
+              key={label}
+              className="border-t border-sage-light grid pt-7 pb-7 last:border-b last:border-sage-light"
+              style={{ gridTemplateColumns: '80px 1fr', gap: '20px', alignItems: 'start' }}
+            >
+              <p
+                className="font-serif font-light text-forest tracking-[-0.04em] leading-[1] text-[2.625rem]"
+                style={numStyle}
+              >
+                {num}
+              </p>
+              <div>
+                <p className="text-[0.875rem] font-medium text-deep mb-[5px] tracking-[-0.005em]">
+                  {label}
+                </p>
+                <p className="text-[0.8125rem] leading-[1.58]" style={{ color: '#5a6e5a' }}>
+                  {body}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </RevealSection>
+  )
+}
