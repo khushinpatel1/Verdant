@@ -1,158 +1,198 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  /* Colors — forest */
-  --color-forest-950: #0a120a;
-  --color-forest-900: #111a11;
-  --color-forest-800: #1a2e1a;
-  --color-forest-700: #243d24;
-  --color-forest-600: #2e4d2e;
-  --color-forest-500: #3a6b3a;
-  --color-forest-400: #4d8b4d;
-
-  /* Colors — cream */
-  --color-cream-50:  #fafaf7;
-  --color-cream-100: #f4f4ee;
-  --color-cream-200: #e8e8df;
-  --color-cream-300: #d4d4c8;
-
-  /* Colors — gold */
-  --color-gold-400: #c9a84c;
-  --color-gold-300: #d4b96a;
-  --color-gold-200: #e0cd93;
-
-  /* Colors — emerald */
-  --color-emerald-accent: #50c878;
-
-  /* Fonts */
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
-
-  /* Display font sizes */
-  --font-size-display-2xl: clamp(3rem, 8vw, 7rem);
-  --font-size-display-xl:  clamp(2.5rem, 6vw, 5rem);
-  --font-size-display-lg:  clamp(2rem, 4vw, 3.5rem);
-  --font-size-display-md:  clamp(1.5rem, 3vw, 2.5rem);
-
-  /* Spacing */
-  --spacing-18:      4.5rem;
-  --spacing-22:      5.5rem;
-  --spacing-section: 8rem;
-
-  /* Animations */
-  --animate-fade-up: fadeUp 0.6s ease forwards;
-  --animate-fade-in: fadeIn 0.4s ease forwards;
-  --animate-grain:   grain 0.5s steps(1) infinite;
+@layer base {
+  h1 { font-optical-sizing: auto; }
 }
 
-/* Display size line-height + tracking overrides */
-@layer utilities {
-  .text-display-2xl { line-height: 0.95;  letter-spacing: -0.03em; }
-  .text-display-xl  { line-height: 1;     letter-spacing: -0.025em; }
-  .text-display-lg  { line-height: 1.05;  letter-spacing: -0.02em; }
-  .text-display-md  { line-height: 1.1;   letter-spacing: -0.015em; }
-}
-/* CSS custom properties */
+/* ─── Easing variables ───────────────────────────────── */
 :root {
-  --bg-primary:    #0a120a;
-  --bg-secondary:  #111a11;
-  --bg-elevated:   #1a2e1a;
-  --text-primary:  #f4f4ee;
-  --text-secondary:#a0a898;
-  --text-muted:    #5a6b5a;
-  --accent-gold:   #c9a84c;
-  --accent-emerald:#50c878;
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.12);
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* * {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-  min-height: 100dvh;
-}
-
-::selection {
-  background-color: rgba(201, 168, 76, 0.25);
-  color: #f4f4ee;
-}
-
-::-webkit-scrollbar       { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #2e4d2e; }
-
-/* Utility classes */
-.text-balance    { text-wrap: balance; }
-.text-secondary  { color: var(--text-secondary); }
-.text-muted-custom { color: var(--text-muted); }
-.border-subtle   { border-color: var(--border-subtle); }
-.border-medium   { border-color: var(--border-medium); }
-
-.grain-overlay { position: relative; }
-.grain-overlay::before {
-  content: "";
+/* ─── Grain overlay ──────────────────────────────────── */
+body::before {
+  content: '';
   position: fixed;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.035;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
   pointer-events: none;
   z-index: 9999;
-  animation: grain 0.5s steps(1) infinite;
+  opacity: 0.028;
+  mix-blend-mode: multiply;
 }
 
-.shimmer-text {
-  background: linear-gradient(
-    90deg,
-    var(--text-primary) 0%,
-    var(--accent-gold) 50%,
-    var(--text-primary) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s linear infinite;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+/* ─── Hero entrance stagger ──────────────────────────── */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.hero-el {
+  opacity: 0;
+  animation: heroReveal 0.85s var(--ease-expo) both;
+}
+.hero-d1 { animation-delay: 0.05s; }
+.hero-d2 { animation-delay: 0.20s; }
+.hero-d3 { animation-delay: 0.35s; }
+.hero-d4 { animation-delay: 0.50s; }
+
+/* ─── Hero card float ────────────────────────────────── */
+@keyframes float1 {
+  0%, 100% { transform: translate(-60%, -52%) rotate(-2.5deg) translateY(0px); }
+  50%       { transform: translate(-60%, -52%) rotate(-2.5deg) translateY(-10px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: rotate(2deg) translateY(0px); }
+  50%       { transform: rotate(2deg) translateY(8px); }
 }
 
-@keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10%  { transform: translate(-2%, -3%); }
-  20%  { transform: translate(3%, 2%); }
-  30%  { transform: translate(-1%, 4%); }
-  40%  { transform: translate(2%, -2%); }
-  50%  { transform: translate(-3%, 1%); }
-  60%  { transform: translate(1%, 3%); }
-  70%  { transform: translate(-2%, -1%); }
-  80%  { transform: translate(3%, -3%); }
-  90%  { transform: translate(-1%, 2%); }
+/* ─── Scroll reveal ──────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity  0.75s var(--ease-expo),
+    transform 0.75s var(--ease-expo);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
+/* stagger up to 6 direct children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity  0.65s var(--ease-expo),
+    transform 0.65s var(--ease-expo);
 }
+.reveal-stagger.in-view > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.08s; }
+.reveal-stagger.in-view > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.18s; }
+.reveal-stagger.in-view > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.28s; }
+.reveal-stagger.in-view > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.38s; }
+.reveal-stagger.in-view > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.48s; }
+.reveal-stagger.in-view > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.58s; }
+
+/* ─── Blob shapes ────────────────────────────────────── */
+.blob-a {
+  position: absolute;
+  width: 560px; height: 540px;
+  top: -100px; right: -80px;
+  background: #d9dcd9;
+  border-radius: 55% 45% 62% 38% / 48% 52% 38% 62%;
+  transition: transform 1.0s var(--ease-out);
+  will-change: transform;
+}
+.blob-b {
+  position: absolute;
+  width: 300px; height: 290px;
+  bottom: -40px; right: 80px;
+  background: #bfc9c3;
+  opacity: 0.5;
+  border-radius: 44% 56% 38% 62% / 60% 42% 58% 40%;
+  transition: transform 1.2s var(--ease-out);
+  will-change: transform;
+}
+.blob-c {
+  position: absolute;
+  width: 180px; height: 180px;
+  top: 38%; right: 30%;
+  background: #567268;
+  opacity: 0.1;
+  border-radius: 50% 50% 38% 62% / 55% 44% 56% 45%;
+  transition: transform 0.9s var(--ease-out);
+  will-change: transform;
+}
+.blob-d {
+  position: absolute;
+  width: 240px; height: 200px;
+  bottom: 80px; right: 42%;
+  background: #eaebe5;
+  opacity: 0.75;
+  border-radius: 62% 38% 45% 55% / 40% 60% 50% 50%;
+  transition: transform 1.1s var(--ease-out);
+  will-change: transform;
+}
+
+/* ─── Waitlist blobs ─────────────────────────────────── */
+.wl-blob-a {
+  position: absolute;
+  top: -100px; right: -60px;
+  width: 380px; height: 380px;
+  background: #2f3d34;
+  border-radius: 55% 45% 60% 40% / 42% 58% 38% 62%;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.wl-blob-b {
+  position: absolute;
+  bottom: -80px; left: 60%;
+  width: 240px; height: 240px;
+  background: #232c26;
+  border-radius: 45% 55% 40% 60% / 58% 44% 56% 42%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ─── Labels ─────────────────────────────────────────── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  color: #567268;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: #567268;
+  flex-shrink: 0;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 300;
+  color: #567268;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: #567268;
+  opacity: 0.45;
+}
+
+/* ─── Hover underline (footer / nav links) ───────────── */
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: currentColor;
+  transition: width 0.28s var(--ease-expo);
+}
+.hover-line:hover::after { width: 100%; }
