@@ -345,6 +345,30 @@ body::after {
   letter-spacing: 0.01em;
 }
 
+/* Easter egg → /emerald. A stray jade stone, slightly off, never signposted. */
+.footer-egg {
+  display: inline-block;
+  width: 10px; height: 10px;
+  margin-left: 7px;
+  vertical-align: 2px;
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  rotate: -8deg;
+}
+.footer-egg span {
+  display: block; width: 100%; height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(circle at 35% 30%, #5fae7e, #1f6b3a 70%, #123f23);
+  opacity: 0.45;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.4);
+  transition: opacity 0.5s var(--ease), box-shadow 0.5s var(--ease), scale 0.5s var(--ease);
+}
+.footer-egg:hover span,
+.footer-egg:focus-visible span {
+  opacity: 1;
+  scale: 1.25;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.6), 0 0 10px rgba(95,174,126,0.7);
+}
+
 /* ═══════════════════════════════════════════
    STUDIO HOME  /
    ═══════════════════════════════════════════ */
@@ -356,7 +380,7 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--cream);
+  background: transparent; /* let the fixed pond show through the hero */
   overflow: hidden;
 }
 
@@ -368,11 +392,12 @@ body::after {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
-  opacity: 0.85;
-  mix-blend-mode: multiply;
+  z-index: 0;            /* sits above the paper, below all content (which is z:1+) */
+  opacity: 0.92;
   pointer-events: none;
 }
+/* every page's content rides above the fixed pond */
+main { position: relative; z-index: 1; }
 /* reduced-motion / no-webgl: a still pond wash instead of animation */
 @media (prefers-reduced-motion: reduce) {
   .fluid-bg {
@@ -389,8 +414,8 @@ body::after {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 60% at 28% 50%, rgba(251,248,242,0.62), transparent 70%),
-    linear-gradient(180deg, rgba(251,248,242,0.35) 0%, transparent 30%, transparent 70%, rgba(251,248,242,0.5) 100%);
+    radial-gradient(ellipse 72% 64% at 32% 42%, rgba(251,248,242,0.80), transparent 72%),
+    linear-gradient(180deg, rgba(251,248,242,0.5) 0%, transparent 42%, transparent 64%, rgba(251,248,242,0.42) 100%);
 }
 
 .sh-hero-inner {
@@ -447,7 +472,47 @@ body::after {
 .sh-hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; align-items: center; }
 
 .sh-hero-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 1.1rem; }
-.sh-sprig { width: 150px; height: auto; color: var(--moss); }
+
+/* Hero muse — Japanese plum blossoms in moonlight (18th c., CC0).
+   Soft watercolor-edge mask bleeds the painting into the cream; a faint sage
+   wash harmonizes the warm original toward the brand greens; slow sway = alive. */
+.sh-plum {
+  position: absolute;
+  top: 50%;
+  right: clamp(-2rem, 1vw, 2rem);
+  transform: translateY(-46%);
+  width: clamp(280px, 34vw, 540px);
+  margin: 0;
+  line-height: 0;
+  z-index: 0;            /* behind the hero text (sh-hero-inner is z:1) */
+  animation: plum-sway 16s ease-in-out infinite;
+  transform-origin: 60% 100%;
+  pointer-events: none;
+}
+.sh-plum-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* harmonize the warm painting toward sage/green without muddy duotone */
+  filter: saturate(0.82) brightness(1.04) hue-rotate(-8deg) contrast(0.98);
+  -webkit-mask-image: radial-gradient(118% 90% at 56% 52%, #000 34%, transparent 78%);
+          mask-image: radial-gradient(118% 90% at 56% 52%, #000 34%, transparent 78%);
+}
+/* faint moss wash, blended into the painting's color, kept low so detail survives */
+.sh-plum::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(155deg, rgba(122,158,126,0.22), rgba(45,80,22,0.10) 60%, transparent);
+  mix-blend-mode: color;
+  -webkit-mask-image: radial-gradient(118% 90% at 56% 52%, #000 34%, transparent 78%);
+          mask-image: radial-gradient(118% 90% at 56% 52%, #000 34%, transparent 78%);
+  pointer-events: none;
+}
+@keyframes plum-sway {
+  0%, 100% { transform: translateY(-46%) rotate(-0.5deg); }
+  50%      { transform: translateY(calc(-46% - 6px)) rotate(0.5deg); }
+}
+@media (prefers-reduced-motion: reduce) { .sh-plum { animation: none; } }
 .sh-fieldnote {
   font-family: var(--ff-mono);
   font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -462,7 +527,7 @@ body::after {
   border-top: 1.5px solid var(--forest-900);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--cream);
+  background: rgba(251,248,242,0.86); /* translucent — pond breathes beneath */
 }
 .sh-shelf-row {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -555,7 +620,7 @@ body::after {
 
 /* ── Approach / Seasons strip (new) ── */
 .sh-seasons {
-  background: var(--parchment);
+  background: rgba(244,238,226,0.85); /* translucent parchment over the pond */
   padding: 8rem clamp(2rem, 7vw, 6.5rem);
   position: relative;
 }
@@ -603,9 +668,10 @@ body::after {
 /* ── Pull quote (new) ── */
 .sh-quote {
   background:
-    radial-gradient(110% 90% at 50% -10%, var(--sage-soft) 0%, transparent 55%),
-    radial-gradient(80% 70% at 88% 120%, rgba(200,151,63,0.10) 0%, transparent 60%),
-    var(--cream);
+    radial-gradient(70% 60% at 50% 50%, rgba(251,248,242,0.62) 0%, transparent 72%),
+    radial-gradient(80% 70% at 88% 120%, rgba(200,151,63,0.06) 0%, transparent 60%);
+    /* transparent at the edges — the fixed pond breathes through; a soft cream
+       halo behind the centered quote keeps the type crisp */
   padding: 8rem clamp(2rem, 7vw, 6.5rem);
   text-align: center;
 }
@@ -627,7 +693,7 @@ body::after {
 .sh-products {
   background:
     radial-gradient(70% 60% at 12% 8%, rgba(122,158,126,0.10) 0%, transparent 55%),
-    var(--cream);
+    rgba(251,248,242,0.85);
   padding: 4rem clamp(2rem, 7vw, 6.5rem) 9rem;
   position: relative;
 }
@@ -737,9 +803,8 @@ body::after {
 .garden-hero-lead { max-width: 34rem; }
 .garden-sub { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--terra); line-height: 1.65; margin-bottom: 1.8rem; }
 .garden-hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-.garden-hero-aside { display: flex; align-items: flex-end; gap: 1rem; color: var(--moss); }
-.garden-hero-sprig { width: 84px; flex: none; display: block; }
-.garden-hero-sprig svg { width: 100%; height: auto; display: block; }
+.garden-hero-aside { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; color: var(--moss); }
+.garden-hero-aside .sh-fieldnote { text-align: center; }
 
 /* editorial fact row — hairline-separated mono labels (no saturated strip) */
 .garden-facts {
@@ -751,25 +816,81 @@ body::after {
 .garden-fact-value { font-family: var(--ff-display); font-weight: 600; font-size: 2.2rem; color: var(--green); line-height: 1; }
 .garden-fact-label { font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay); }
 
-/* FEATURES — flat cream, hairline-ruled editorial rows */
-.garden-features { background: var(--cream); padding: 7rem clamp(2rem, 7vw, 6.5rem) 6rem; position: relative; z-index: 1; }
-.garden-features-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; }
-.garden-features .section-label { display: inline-flex; margin-bottom: 2.4rem; }
-.garden-feature {
-  display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: center;
-  padding: 3.2rem 0; border-top: 1px solid rgba(45,80,22,0.16);
+/* ── Device frame (shared: hero loop + showcase shots) ── */
+.gx-phone {
+  position: relative;
+  width: clamp(220px, 26vw, 300px);
+  aspect-ratio: 400 / 860;
+  border-radius: 34px;
+  padding: 8px;
+  background: linear-gradient(160deg, #20301f, #0d1a10);
+  box-shadow: 0 24px 60px -28px rgba(13,26,16,0.55), 0 2px 0 rgba(255,255,255,0.06) inset;
+  flex: none;
 }
-.garden-feature:nth-child(3) { grid-template-columns: 1fr 1.6fr; }
-.garden-feature:nth-child(3) .garden-feature-mark { order: -1; }
-.garden-feature-number { font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; }
-.garden-feature-title {
-  font-family: var(--ff-display); font-style: italic;
-  font-variation-settings: 'opsz' 72;
-  font-weight: 600; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.08; color: var(--green); margin-bottom: 1.2rem; letter-spacing: -0.02em;
+.gx-phone--hero { width: clamp(230px, 30vw, 320px); }
+.gx-screen {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: 27px;
+  overflow: hidden;
+  background: var(--cream);
 }
-.garden-feature-body { font-size: 0.98rem; line-height: 1.78; color: var(--terra); max-width: 34rem; }
-.garden-feature-mark { display: flex; align-items: center; justify-content: center; color: var(--moss); }
-.garden-feature-mark svg { width: clamp(96px, 14vw, 150px); height: auto; }
+.gx-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.gx-frame { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s var(--ease); }
+.gx-frame.on { opacity: 1; }
+.gx-notch {
+  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+  width: 34%; height: 6px; border-radius: 6px; background: rgba(13,26,16,0.55);
+  z-index: 2; pointer-events: none;
+}
+
+/* ── Real-app showcase — alternating themed screenshots ── */
+.garden-showcase {
+  background: rgba(251,248,242,0.85); /* translucent — pond breathes beneath */
+  padding: 7rem clamp(2rem, 7vw, 6.5rem) 6rem;
+  position: relative; z-index: 1;
+}
+.garden-showcase-head { max-width: 56rem; margin: 0 auto 4.5rem; text-align: center; }
+.garden-showcase-head .section-label { display: inline-flex; margin-bottom: 1.5rem; }
+.garden-showcase-title {
+  font-family: var(--ff-display); font-variation-settings: 'opsz' 72;
+  font-weight: 600; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08;
+  letter-spacing: -0.02em; color: var(--green); margin-bottom: 1.2rem;
+}
+.garden-showcase-title em { font-style: italic; color: var(--gold); }
+.garden-showcase-note { font-size: 1.02rem; line-height: 1.7; color: var(--terra); }
+
+.garden-shot {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center; padding: 3.4rem 0;
+}
+.garden-shot--flip { grid-template-columns: 1fr auto; }
+.garden-shot--flip .gx-phone { order: 2; }
+.garden-shot-text { max-width: 32rem; }
+.garden-shot--flip .garden-shot-text { justify-self: end; }
+.garden-shot-screen {
+  font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.9rem;
+}
+.garden-shot-title {
+  font-family: var(--ff-display); font-style: italic; font-variation-settings: 'opsz' 72;
+  font-weight: 600; font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height: 1.08;
+  color: var(--green); letter-spacing: -0.02em; margin-bottom: 1.1rem;
+}
+.garden-shot-body { font-size: 0.98rem; line-height: 1.78; color: var(--terra); margin-bottom: 1.4rem; }
+.garden-shot-meta {
+  font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--moss);
+  padding: 0.4rem 0.7rem; border: 1px solid rgba(122,158,126,0.4); border-radius: 4px;
+  display: inline-block;
+}
+@media (max-width: 760px) {
+  .garden-shot, .garden-shot--flip { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 2rem; }
+  .garden-shot--flip .gx-phone { order: 0; }
+  .garden-shot--flip .garden-shot-text { justify-self: center; }
+  .garden-shot-meta { margin: 0 auto; }
+}
 
 /* PULL QUOTE */
 .garden-quote { background: var(--parchment); padding: 7rem clamp(2rem, 7vw, 6.5rem); text-align: center; }

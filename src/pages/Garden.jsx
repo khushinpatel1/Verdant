@@ -1,48 +1,51 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
 
-const features = [
-  {
-    number: '01',
-    title: 'Privacy, by architecture.',
-    body: 'Garden is end-to-end encrypted. Not privacy-policy privacy — technical privacy. Verdant cannot read your data. No one can. Your financial life belongs to you.',
-  },
-  {
-    number: '02',
-    title: 'Grove. Your AI advisor.',
-    body: "Grove doesn't push products. It doesn't serve ads. It reads your patterns and asks questions — like a good financial advisor who's paid by you, not a bank.",
-  },
-  {
-    number: '03',
-    title: 'Plant a Seed.',
-    body: 'Small moves, tended over time. Garden turns the anxiety of personal finance into something you can tend. A seed today. A canopy eventually.',
-  },
+/* Real captures of the live Garden app, each shot under a different theme + font
+   to show off the customization. (Captured from the running prototype.) */
+const showcase = [
+  { img: 'garden-moss-cream',      screen: 'Garden', theme: 'Moss & Cream',    font: 'Editorial',
+    title: 'The whole garden, at a glance.',
+    body: 'Net worth, health score, every account — your entire financial life in one calm view. Nothing mined, nothing sold.' },
+  { img: 'grow-pale-sage',         screen: 'Grow',   theme: 'Pale Sage',       font: 'Newsstand',
+    title: 'Tend the month.',
+    body: 'Transactions and budgets you actually want to open. Add one and the balances move in real time — no spreadsheet, no dread.' },
+  { img: 'roots-forest-loam',      screen: 'Roots',  theme: 'Forest Loam',     font: 'Spectral',
+    title: 'The roots beneath.',
+    body: 'Every account, asset and debt — the structure your money actually grows from, laid out without judgement.' },
+  { img: 'seeds-midnight-forest',  screen: 'Seeds',  theme: 'Midnight Forest', font: 'Caslon',
+    title: 'Plant what matters.',
+    body: 'Goals you germinate and tend over seasons. Small moves today, a canopy eventually.' },
+  { img: 'grove-eucalyptus',       screen: 'Grove',  theme: 'Eucalyptus',      font: 'Instrument',
+    title: 'Grove listens. Quietly.',
+    body: 'A private advisor paid by you, never a bank. It reads your patterns and asks better questions — and never sells the answers.' },
 ]
 
-/* Hand-drawn botanical marks — line art, moss stroke. One per feature row.
-   Sprout, leaf-pair, canopy: the seed → grove arc of the product itself. */
-const sprout = (
-  <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M60 112 V52" />
-    <path d="M60 76 C40 76 26 62 24 42 48 42 60 58 60 76Z" />
-    <path d="M60 60 C80 60 94 46 96 26 72 26 60 42 60 60Z" />
-    <circle cx="60" cy="40" r="3" />
-  </svg>
-)
-const leaf = (
-  <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M30 96 C30 52 56 28 96 24 92 64 66 90 30 96Z" />
-    <path d="M30 96 C48 78 66 60 84 42" />
-  </svg>
-)
-const canopy = (
-  <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M60 112 V58" />
-    <path d="M60 84 L34 64 M60 84 L86 64 M60 70 L42 54 M60 70 L78 54" />
-    <circle cx="60" cy="40" r="22" />
-  </svg>
-)
-const marks = [sprout, leaf, canopy]
+/* The hero device — the real prototype adding a transaction, numbers changing.
+   Cross-fades the captured frames into a slow loop. */
+const txFrames = ['tx-1', 'tx-2', 'tx-3', 'tx-4']
+function TxLoop() {
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+    const id = setInterval(() => setI(x => (x + 1) % txFrames.length), 1500)
+    return () => clearInterval(id)
+  }, [])
+  return (
+    <div className="gx-phone gx-phone--hero" aria-hidden="true">
+      <div className="gx-screen">
+        {txFrames.map((f, idx) => (
+          <img key={f} src={`/garden/${f}.jpg`} alt=""
+               className={`gx-frame${idx === i ? ' on' : ''}`}
+               loading={idx === 0 ? 'eager' : 'lazy'} decoding="async" />
+        ))}
+      </div>
+      <span className="gx-notch" aria-hidden="true" />
+    </div>
+  )
+}
 
 export default function Garden() {
   return (
@@ -74,11 +77,11 @@ export default function Garden() {
               </div>
             </div>
 
-            <div className="garden-hero-aside reveal" style={{ '--d': '.18s' }} aria-hidden="true">
-              <span className="garden-hero-sprig">{sprout}</span>
-              <p className="sh-fieldnote">
-                No. 01 / Field Notes
-                <strong>Encrypted end to end</strong>
+            <div className="garden-hero-aside reveal" style={{ '--d': '.18s' }}>
+              <TxLoop />
+              <p className="sh-fieldnote" aria-hidden="true">
+                Live capture / Add a transaction
+                <strong>Numbers move as you plant</strong>
               </p>
             </div>
           </div>
@@ -100,21 +103,35 @@ export default function Garden() {
         </div>
       </section>
 
-      {/* ── FEATURES ── */}
-      <section className="garden-features">
-        <div className="garden-features-inner">
-          <span className="section-label reveal">What grows here</span>
-          {features.map((f, i) => (
-            <div key={f.number} className="garden-feature reveal">
-              <div className="garden-feature-text">
-                <span className="garden-feature-number">{f.number}</span>
-                <h2 className="garden-feature-title">{f.title}</h2>
-                <p className="garden-feature-body">{f.body}</p>
-              </div>
-              <div className="garden-feature-mark" aria-hidden="true">{marks[i]}</div>
-            </div>
-          ))}
+      {/* ── REAL-APP SHOWCASE ── alternating themed screenshots of the live app */}
+      <section className="garden-showcase">
+        <div className="garden-showcase-head reveal">
+          <span className="section-label">The app itself</span>
+          <h2 className="garden-showcase-title">
+            One app. <em>Your</em> garden — themed and lettered to taste.
+          </h2>
+          <p className="garden-showcase-note">
+            Every screen below is the real prototype, each shot under a different theme and
+            typeface. Garden bends to you; it never the other way around.
+          </p>
         </div>
+
+        {showcase.map((s, i) => (
+          <div key={s.img} className={`garden-shot reveal${i % 2 ? ' garden-shot--flip' : ''}`}>
+            <div className="gx-phone">
+              <div className="gx-screen">
+                <img src={`/garden/${s.img}.jpg`} alt={`Garden ${s.screen} screen, ${s.theme} theme`} loading="lazy" decoding="async" />
+              </div>
+              <span className="gx-notch" aria-hidden="true" />
+            </div>
+            <div className="garden-shot-text">
+              <span className="garden-shot-screen">{s.screen}</span>
+              <h3 className="garden-shot-title">{s.title}</h3>
+              <p className="garden-shot-body">{s.body}</p>
+              <span className="garden-shot-meta">{s.theme} · {s.font}</span>
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* ── PULL QUOTE ── */}

@@ -46,6 +46,9 @@ export default function Studio() {
       {/* ── HERO ── */}
       <section className="sh-hero">
         <div className="sh-hero-scrim" aria-hidden="true" />
+        <figure className="sh-plum" aria-hidden="true">
+          <img className="sh-plum-img" src="/art/plum-moon-web.jpg" alt="" loading="eager" decoding="async" />
+        </figure>
         <div className="sh-hero-inner">
 
           <p className="sh-kicker reveal">
@@ -70,17 +73,9 @@ export default function Studio() {
             </div>
 
             <div className="sh-hero-aside reveal" style={{ '--d': '.18s' }} aria-hidden="true">
-              <svg className="sh-sprig" viewBox="0 0 120 200" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M60 196 V40" />
-                <path d="M60 120 C36 120 20 102 18 78 44 78 60 96 60 120Z" />
-                <path d="M60 96 C84 96 100 78 102 54 76 54 60 72 60 96Z" />
-                <path d="M60 74 C40 74 26 58 24 38 48 38 60 54 60 74Z" />
-                <circle cx="60" cy="32" r="12" />
-                <path d="M60 20 v-8 M48 32 h-8 M72 32 h8 M51 23 l-6-6 M69 23 l6-6 M51 41 l-6 6 M69 41 l6 6" />
-              </svg>
               <p className="sh-fieldnote">
                 No. 01 / Field Notes
-                <strong>Encrypted by default</strong>
+                <strong>Plum &amp; moon · est. spring</strong>
               </p>
             </div>
           </div>
