@@ -1,16 +1,20 @@
 # Verdant Studio
 
+> Cross-project working rules live in `~/.claude/CLAUDE.md`. This file is what's really
+> going on in *this* project.
+
 ## What this is
 Marketing site for Verdant Studio — a privacy-first software studio ("software built for
-people, not advertisers"). A single-page React app, client-side routed. Deployed on
-Cloudflare Pages via GitHub.
+people, not advertisers"). A single-page React app, client-side routed.
 
-## Stack — keep it simple
+## Stack
 - React 19 + React Router 7 (SPA, `BrowserRouter`).
-- Vite 6 build tool. Scripts: `npm run dev` (port 5173) · `npm run build` · `npm run preview`.
+- Vite 6. Scripts: `npm run dev` (port 5173) · `npm run build` · `npm run preview`.
 - Plain CSS with custom properties in `src/index.css`. No CSS framework.
 - No backend, no database, no API routes. Static front-end only.
-- Deploy: push to GitHub → Cloudflare Pages builds it.
+- **Deploy:** push to GitHub → Cloudflare Pages builds it. Because it's a `BrowserRouter`
+  SPA with deep links (e.g. `/team/:slug`), `public/_redirects` maps `/* /index.html 200`
+  so direct hits and refreshes on deep links don't 404. Keep that file.
 
 ## File map
 - `index.html` → mounts `src/main.jsx` → `src/App.jsx` (defines routes).
@@ -24,7 +28,8 @@ Cloudflare Pages via GitHub.
 ## Visual direction
 Organic, asymmetric, layered. Watercolor logic — colors bleed at edges, elements overlap.
 Never a clean grid. Never default AI symmetry. Multiple depths. Imperfection is intentional.
-Think Diablo III art direction — the world feels grown, not designed.
+Think **Diablo III art direction specifically** — the painterly, saturated, hand-illustrated
+look it was *criticized* for, not the franchise's gothic tone. The world feels grown, not designed.
 
 ## Typography (CSS vars in `src/index.css`)
 - `--ff-display`: **Newsreader** — headlines. Editorial high-contrast serif, composed (not whimsical).
@@ -33,23 +38,11 @@ Think Diablo III art direction — the world feels grown, not designed.
 Always reference the vars, never hardcode a font name.
 
 ## Colors (CSS vars in `src/index.css`)
-forest `#15300A` / `#2D5016` · moss `#7A9E7E` · sage `#C8D5B9` · parchment `#F4EEE2` ·
+forest-dark `#15300A` / forest `#2D5016` · moss `#7A9E7E` · sage `#C8D5B9` · parchment `#F4EEE2` ·
 cream `#FBF8F2` · amber `#8B6914` · gold `#C8973F` · terra `#6B3F2A`.
 Use the `--var` tokens, never raw hex in components.
 
-## Working rules
-- **Edit, don't rewrite.** Use targeted edits; never `Write` a whole file unless I ask.
+## Project rules
 - One section at a time — finish it before starting the next.
-- Show diffs, not full rewrites.
 - Ask before structural / layout decisions.
-- Mobile responsive always. Semantic HTML.
-- Batch related changes into one pass; `/clear` between unrelated tasks to keep context lean.
-
-## Models
-Opus 4.8 for design, judgment, and refactors. Sonnet 4.6 for mechanical / scaffolding work.
-
-## Claude Code workflow
-- Verify visual changes with the `preview_*` tools. Use `preview_snapshot` / `preview_inspect`
-  while iterating (cheap, text); reserve `preview_screenshot` for final proof (image tokens).
-- `/code-review` before committing; `/simplify` to clean up changed code.
-- `npm run dev` and the read-only preview tools are pre-approved (see `.claude/settings.json`).
+- `src/index.css` is large: surgical edits only, never a whole-file rewrite.

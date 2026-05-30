@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "verdant-dev",
-      "runtimeExecutable": "/Applications/Cursor.app/Contents/Resources/app/resources/helpers/node",
+      "runtimeExecutable": "/Users/khushinpatel/.local/node/current/bin/node",
       "runtimeArgs": ["node_modules/.bin/vite", "--port", "5173"],
       "port": 5173
     }
