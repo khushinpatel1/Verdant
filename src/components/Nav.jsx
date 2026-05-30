@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const links = [
-  { to: '/',        label: 'Studio',  end: true },
-  { to: '/garden',  label: 'Garden' },
-  { to: '/about',   label: 'Ethos' },
-  { to: '/team',    label: 'Team' },
+  { to: '/',        label: 'Studio',  end: true, desc: 'The studio' },
+  { to: '/garden',  label: 'Garden',             desc: 'Finance · Live' },
+  { to: '/about',   label: 'Ethos',              desc: 'What we believe' },
+  { to: '/team',    label: 'Team',               desc: 'The people' },
 ]
 
+// Pages with a dark background behind the nav — nav text stays cream (light).
 const darkRoutes = ['/emerald', '/about', '/team']
 
 export default function Nav() {
@@ -15,7 +16,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
 
-  const isLight = darkRoutes.some(r => pathname === r || pathname.startsWith('/team/'))
+  const isLight = darkRoutes.some(r => pathname === r) || pathname.startsWith('/team/')
 
   useEffect(() => { setOpen(false) }, [pathname])
 
@@ -59,19 +60,31 @@ export default function Nav() {
 
       <div className={`nav-overlay${open ? ' open' : ''}`} role="dialog" aria-label="Navigation menu">
         <button className="nav-overlay-close" aria-label="Close menu" onClick={() => setOpen(false)}>×</button>
-        <ul className="nav-overlay-links">
-          {links.map(({ to, label, end }) => (
-            <li key={to}>
-              <NavLink
-                to={to}
-                end={end}
-                className={({ isActive }) => `nav-overlay-link${isActive ? ' active' : ''}`}
-              >
-                {label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        <div className="nav-overlay-inner">
+          <span className="nav-overlay-eyebrow">
+            <span className="nav-overlay-eyebrow-rule" aria-hidden="true" />
+            Verdant — Index
+          </span>
+          <ul className="nav-overlay-links">
+            {links.map(({ to, label, end, desc }, i) => (
+              <li key={to} style={{ '--i': i }}>
+                <NavLink
+                  to={to}
+                  end={end}
+                  className={({ isActive }) => `nav-overlay-link${isActive ? ' active' : ''}`}
+                >
+                  <span className="nav-overlay-num" aria-hidden="true">0{i + 1}</span>
+                  <span className="nav-overlay-label">{label}</span>
+                  <span className="nav-overlay-desc">{desc}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="nav-overlay-foot">
+            <span className="nav-overlay-foot-line">Software grown for people, not advertisers.</span>
+            <a className="nav-overlay-foot-mail" href="mailto:hello@verdant.studio">hello@verdant.studio</a>
+          </div>
+        </div>
       </div>
     </>
   )

@@ -30,7 +30,7 @@ function TxLoop() {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) return
-    const id = setInterval(() => setI(x => (x + 1) % txFrames.length), 1500)
+    const id = setInterval(() => setI(x => (x + 1) % txFrames.length), 650)
     return () => clearInterval(id)
   }, [])
   return (
