@@ -12,9 +12,11 @@ people, not advertisers"). A single-page React app, client-side routed.
 - Vite 6. Scripts: `npm run dev` (port 5173) · `npm run build` · `npm run preview`.
 - Plain CSS with custom properties in `src/index.css`. No CSS framework.
 - No backend, no database, no API routes. Static front-end only.
-- **Deploy:** push to GitHub → Cloudflare Pages builds it. Because it's a `BrowserRouter`
-  SPA with deep links (e.g. `/team/:slug`), `public/_redirects` maps `/* /index.html 200`
-  so direct hits and refreshes on deep links don't 404. Keep that file.
+- **Deploy:** push to GitHub → Cloudflare builds and runs `npx wrangler deploy` (Worker
+  named `verdant`, Vite framework preset). Deep-link SPA routing (e.g. `/team/:slug`) is
+  handled by the Worker asset config `not_found_handling: "single-page-application"` —
+  do **not** add a `public/_redirects` file; Cloudflare's Worker validation rejects the
+  `/* /index.html 200` rule as an infinite loop and the deploy fails.
 
 ## File map
 - `index.html` → mounts `src/main.jsx` → `src/App.jsx` (defines routes).
