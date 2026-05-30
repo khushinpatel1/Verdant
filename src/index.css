@@ -26,7 +26,9 @@
   --clay:       #A6694A;
 
   /* Gradients */
-  --grad-forest: linear-gradient(155deg, #15300A 0%, #2D5016 52%, #3C6B1E 100%);
+  --grad-forest: radial-gradient(125% 130% at 80% 12%, rgba(60,107,30,0.55) 0%, transparent 52%),
+                 radial-gradient(90% 120% at 8% 100%, rgba(14,34,8,0.6) 0%, transparent 55%),
+                 linear-gradient(155deg, #143009 0%, #20420F 50%, #2D5016 100%);
   --grad-gold:   linear-gradient(115deg, var(--amber) 0%, var(--gold) 100%);
   --grad-dawn:   linear-gradient(160deg, #FBF8F2 0%, #F4EEE2 60%, #E6DECB 100%);
 
@@ -74,8 +76,9 @@ body::after {
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.13;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection { background: var(--moss); color: var(--white); }
@@ -593,12 +596,19 @@ body::after {
   border: 1px solid rgba(107,63,42,0.12);
   border-radius: 22px;
   padding: 2rem 1.7rem 2.2rem;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s, rotate 0.4s var(--ease);
 }
-.sh-season:hover { transform: translateY(-6px); box-shadow: var(--sh-md); border-color: var(--moss); }
-.sh-season:nth-child(even) { margin-top: 2.2rem; }
-.sh-season-glyph { font-size: 1.8rem; line-height: 1; margin-bottom: 1rem; display: block; }
+.sh-season:hover { transform: translateY(-8px); box-shadow: var(--sh-md); border-color: var(--moss); rotate: 0deg; }
+/* Hand-placed, not gridded — each card sits a little differently */
+.sh-season:nth-child(1) { margin-top: 0.6rem; rotate: -1deg;   border-radius: 28px 20px 24px 22px; }
+.sh-season:nth-child(2) { margin-top: 3.2rem; rotate: 0.7deg;  border-radius: 20px 27px 22px 25px; background: var(--sage-soft); }
+.sh-season:nth-child(3) { margin-top: 1.2rem; rotate: -0.6deg; border-radius: 25px 22px 28px 20px; }
+.sh-season:nth-child(4) { margin-top: 4.4rem; rotate: 1.1deg;  border-radius: 22px 25px 20px 28px; background: var(--parchment); }
+.sh-season-icon { width: 30px; height: 30px; color: var(--green-600); margin-bottom: 1.1rem; display: block; }
+.sh-season-icon svg { width: 100%; height: 100%; display: block; }
+.sh-season-meta { display: flex; align-items: baseline; gap: 0.6rem; }
 .sh-season-num { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.16em; color: var(--clay); text-transform: uppercase; }
+.sh-season-stage { font-family: var(--ff-mono); font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--moss); }
 .sh-season-name {
   font-family: var(--ff-display); font-style: italic; font-weight: 600;
   font-size: 1.5rem; color: var(--green); margin: 0.5rem 0 0.7rem; letter-spacing: -0.01em;
@@ -607,7 +617,10 @@ body::after {
 
 /* ── Pull quote (new) ── */
 .sh-quote {
-  background: var(--cream);
+  background:
+    radial-gradient(110% 90% at 50% -10%, var(--sage-soft) 0%, transparent 55%),
+    radial-gradient(80% 70% at 88% 120%, rgba(200,151,63,0.10) 0%, transparent 60%),
+    var(--cream);
   padding: 8rem clamp(2rem, 7vw, 6.5rem);
   text-align: center;
 }
@@ -627,7 +640,9 @@ body::after {
 
 /* ── Products ── */
 .sh-products {
-  background: var(--cream);
+  background:
+    radial-gradient(70% 60% at 12% 8%, rgba(122,158,126,0.10) 0%, transparent 55%),
+    var(--cream);
   padding: 4rem clamp(2rem, 7vw, 6.5rem) 9rem;
   position: relative;
 }
@@ -646,8 +661,11 @@ body::after {
   border-radius: 30px;
   padding: 2.6rem 2.4rem;
   text-decoration: none; color: inherit; display: block; overflow: hidden;
-  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s;
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s, rotate 0.45s var(--ease);
 }
+.sh-pcard:nth-child(1) { rotate: -0.7deg; border-radius: 34px 26px 30px 28px; }
+.sh-pcard:nth-child(2) { rotate: 0.8deg;  border-radius: 26px 34px 28px 30px; }
+.sh-pcard:hover { rotate: 0deg; }
 .sh-pcard::after {
   content: '';
   position: absolute; inset: auto -30% -50% auto;
@@ -815,7 +833,26 @@ body::after {
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
-.emerald-shape { position: absolute; inset: 0; pointer-events: none; }
+.emerald-shape { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+/* Something alive, breathing under the surface */
+.emerald-glow {
+  position: absolute; left: 50%; top: 56%; z-index: 1;
+  width: min(74vw, 660px); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(200,151,63,0.20) 0%, rgba(122,158,126,0.07) 42%, transparent 70%);
+  filter: blur(10px);
+  animation: emerald-breathe 7.5s ease-in-out infinite;
+}
+@keyframes emerald-breathe {
+  0%, 100% { opacity: 0.5;  transform: translate(-50%, -50%) scale(0.9); }
+  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
+}
+/* Edge vignette — depth, draws the eye inward */
+.emerald-vignette {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(125% 95% at 50% 50%, transparent 38%, rgba(14,34,8,0.62) 100%);
+}
 .emerald-shape::before {
   content: ''; position: absolute; top: 8%; left: 18%; width: 64%; height: 74%;
   background: radial-gradient(circle at 40% 40%, rgba(200,151,63,0.10), rgba(200,213,185,0.05));
@@ -834,16 +871,24 @@ body::after {
   33%     { transform: translate(20px,-14px) rotate(4deg) scale(1.04); border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%; }
   66%     { transform: translate(-14px,10px) rotate(-3deg) scale(0.96); border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%; }
 }
-.emerald-content { position: relative; z-index: 1; text-align: center; padding: 0 2rem; max-width: 54rem; }
+.emerald-content { position: relative; z-index: 3; text-align: center; padding: 0 2rem; max-width: 54rem; }
 .emerald-headline {
   font-family: var(--ff-display); font-style: italic;
   font-variation-settings: 'opsz' 72;
   font-weight: 600; font-size: clamp(3.2rem, 8vw, 7.2rem); line-height: 1.02; letter-spacing: -0.03em; color: var(--cream); margin-bottom: 2.2rem;
 }
-.emerald-headline em { color: var(--gold); }
+.emerald-headline em { color: var(--gold); text-shadow: 0 0 34px rgba(200,151,63,0.4); }
 .emerald-sub {
   font-family: var(--ff-display); font-size: clamp(1.1rem, 2vw, 1.5rem); font-style: italic;
   color: var(--sage); line-height: 1.6; opacity: 0.85;
+}
+.emerald-cipher {
+  margin-top: 2.6rem;
+  font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.34em;
+  text-transform: uppercase; color: var(--moss); opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .emerald-glow, .emerald-shape::before, .emerald-shape::after { animation: none; }
 }
 
 /* ═══════════════════════════════════════════
@@ -989,7 +1034,8 @@ body::after {
    ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
   .sh-seasons-grid { grid-template-columns: 1fr 1fr; }
-  .sh-season:nth-child(even) { margin-top: 0; }
+  .sh-season:nth-child(1), .sh-season:nth-child(3) { margin-top: 0; }
+  .sh-season:nth-child(2), .sh-season:nth-child(4) { margin-top: 2.4rem; }
   .team-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1021,7 +1067,7 @@ body::after {
 
 @media (max-width: 560px) {
   .sh-seasons-grid { grid-template-columns: 1fr; }
-  .sh-season:nth-child(even) { margin-top: 0; }
+  .sh-season { margin-top: 0 !important; rotate: 0deg !important; }
 }
 
 @media (max-width: 480px) {

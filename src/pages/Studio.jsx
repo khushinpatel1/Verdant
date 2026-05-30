@@ -6,11 +6,42 @@ const tickerItems = [
   'No Ads', 'No Data Sales', 'End-to-End Encrypted', 'Built Slowly', 'Privacy by Architecture',
 ]
 
+const icons = {
+  seed: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 21V10.5" />
+      <path d="M12 11C12 7 9 4.6 4.8 4.8 4.6 9 7 11.4 12 11Z" />
+      <path d="M12 12.5c.2-3.1 2.4-4.6 5.6-4.4.2 3.2-2 4.7-5.6 4.4Z" />
+    </svg>
+  ),
+  leaf: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5.5 18.5C5 10.5 11 4.8 19 5.5c.7 8-5 14-13.5 13Z" />
+      <path d="M6 18 16.5 7.5" />
+    </svg>
+  ),
+  shears: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6" cy="6" r="2.3" />
+      <circle cx="6" cy="18" r="2.3" />
+      <path d="M7.9 7.4 20 16" />
+      <path d="M7.9 16.6 20 8" />
+    </svg>
+  ),
+  tree: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22v-6" />
+      <path d="M9.5 19l-2.5-2M14.5 19l2.5-2" />
+      <path d="M12 16c4.3 0 7.5-3 7.5-6.8C19.5 5.4 16.3 2.6 12 2.6S4.5 5.4 4.5 9.2C4.5 13 7.7 16 12 16Z" />
+    </svg>
+  ),
+}
+
 const seasons = [
-  { num: '01', glyph: '🌱', name: 'Plant', body: 'Every product starts as a single principle: what you give us is yours. We design from that seed outward.' },
-  { num: '02', glyph: '🌿', name: 'Tend', body: 'We build in long cycles. A feature takes as long as it takes to feel right — never as long as the sprint allows.' },
-  { num: '03', glyph: '🍃', name: 'Prune', body: 'We cut what doesn’t serve you. No dark patterns, no growth hacks, no features that mine your attention.' },
-  { num: '04', glyph: '🌳', name: 'Grow', body: 'Software that compounds in your favor over seasons — not ours. Built to be lived with, not extracted from.' },
+  { num: '01', icon: 'seed',   stage: 'germination', name: 'Plant', body: 'Every product starts as a single principle: what you give us is yours. We design from that seed outward.' },
+  { num: '02', icon: 'leaf',   stage: 'vegetative',  name: 'Tend',  body: 'We build in long cycles. A feature takes as long as it takes to feel right — never as long as the sprint allows.' },
+  { num: '03', icon: 'shears', stage: 'pruning',     name: 'Prune', body: 'We cut what doesn’t serve you. No dark patterns, no growth hacks, no features that mine your attention.' },
+  { num: '04', icon: 'tree',   stage: 'canopy',      name: 'Grow',  body: 'Software that compounds in your favor over seasons — not ours. Built to be lived with, not extracted from.' },
 ]
 
 export default function Studio() {
@@ -130,8 +161,11 @@ export default function Studio() {
         <div className="sh-seasons-grid">
           {seasons.map((s, i) => (
             <div key={s.num} className="sh-season reveal" style={{ '--d': `${i * 0.07}s` }}>
-              <span className="sh-season-glyph" aria-hidden="true">{s.glyph}</span>
-              <span className="sh-season-num">{s.num}</span>
+              <span className="sh-season-icon" aria-hidden="true">{icons[s.icon]}</span>
+              <div className="sh-season-meta">
+                <span className="sh-season-num">{s.num}</span>
+                <span className="sh-season-stage">{s.stage}</span>
+              </div>
               <h3 className="sh-season-name">{s.name}</h3>
               <p className="sh-season-body">{s.body}</p>
             </div>
