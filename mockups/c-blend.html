@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C — Blend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesque:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --forest-900:#0E2208; --green:#2D5016; --moss:#7A9E7E; --sage:#C8D5B9;
+  --parchment:#F4EEE2; --cream:#FBF8F2; --amber:#8B6914; --gold:#C8973F; --clay:#A6694A;
+  --ff-display:'Newsreader',Georgia,serif; --ff-body:'Hanken Grotesque',system-ui,sans-serif;
+  --ff-mono:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff-body);background:var(--cream);color:var(--forest-900);-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.45;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+nav{display:flex;justify-content:space-between;align-items:center;padding:32px 64px}
+nav .logo{font-family:var(--ff-display);font-size:1.4rem;font-weight:500}
+nav .links{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;display:flex;gap:34px;color:var(--green)}
+.hero{padding:70px 64px 90px;max-width:1280px;margin:0 auto}
+.eyebrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:16px;margin-bottom:54px}
+.eyebrow::before{content:'';width:46px;height:1px;background:var(--clay)}
+h1{font-family:var(--ff-display);font-weight:400;font-size:clamp(3.2rem,9vw,7.6rem);line-height:.94;letter-spacing:-.03em;max-width:16ch}
+h1 em{font-style:italic;color:var(--green)}
+.hero-foot{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:end;margin-top:72px}
+.sub{font-family:var(--ff-display);font-size:1.34rem;line-height:1.5;color:#3a4a28;max-width:42ch}
+.row{display:flex;gap:14px;margin-top:34px}
+.btn{font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;text-decoration:none}
+.btn.solid{background:var(--forest-900);color:var(--cream)}
+.btn.line{border:1px solid var(--forest-900);color:var(--forest-900)}
+/* quiet hand-drawn sprig, one accent — not a card */
+.sprig{width:190px;height:auto;color:var(--moss)}
+.idx{font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);text-align:right;line-height:2}
+.idx b{color:var(--green);font-weight:500}
+/* full-bleed bottom hairline + product line, editorial */
+.shelf{border-top:1.5px solid var(--forest-900);margin-top:80px;display:grid;grid-template-columns:1fr 1fr;font-family:var(--ff-mono)}
+.shelf a{text-decoration:none;color:inherit;padding:30px 64px;display:flex;justify-content:space-between;align-items:baseline}
+.shelf a:first-child{border-right:1px solid rgba(14,34,8,.2)}
+.shelf .name{font-family:var(--ff-display);font-style:italic;font-size:1.6rem}
+.shelf .tag{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Verdant</div>
+  <div class="links"><span>Garden</span><span>Emerald</span><span>Ethos</span><span>Team</span></div>
+</nav>
+<section class="hero">
+  <div class="eyebrow">Privacy-First Software Studio</div>
+  <h1>Software grown for <em>people,</em> not advertisers.</h1>
+  <div class="hero-foot">
+    <div>
+      <p class="sub">We build apps with one rule: what you give us stays between us. No ads. No tracking. No data sales. Ever.</p>
+      <div class="row">
+        <a class="btn solid" href="#">Explore the Garden →</a>
+        <a class="btn line" href="#">Our Ethos</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:18px">
+      <svg class="sprig" viewBox="0 0 120 200" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 196 V40"/>
+        <path d="M60 120 C36 120 20 102 18 78 44 78 60 96 60 120Z"/>
+        <path d="M60 96 C84 96 100 78 102 54 76 54 60 72 60 96Z"/>
+        <path d="M60 74 C40 74 26 58 24 38 48 38 60 54 60 74Z"/>
+        <circle cx="60" cy="32" r="12"/>
+        <path d="M60 20 v-8 M48 32 h-8 M72 32 h8 M51 23 l-6-6 M69 23 l6-6"/>
+      </svg>
+      <div class="idx">No. 01 / Field Notes<br/><b>Encrypted by default</b></div>
+    </div>
+  </div>
+</section>
+<div class="shelf">
+  <a href="#"><span class="name">Garden</span><span class="tag">01 · Finance · Live</span></a>
+  <a href="#"><span class="name">Emerald</span><span class="tag">02 · Unknown · Soon</span></a>
+</div>
+</body>
+</html>

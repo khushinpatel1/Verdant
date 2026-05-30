@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
 
-const tickerItems = [
-  'No Ads', 'No Data Sales', 'End-to-End Encrypted', 'Built Slowly', 'Privacy by Architecture',
-  'No Ads', 'No Data Sales', 'End-to-End Encrypted', 'Built Slowly', 'Privacy by Architecture',
-]
-
 const icons = {
   seed: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -50,63 +45,59 @@ export default function Studio() {
 
       {/* ── HERO ── */}
       <section className="sh-hero">
-        <div className="sh-hero-wash" aria-hidden="true" />
-        <div className="sh-blob sh-blob--1" aria-hidden="true" />
-        <div className="sh-blob sh-blob--2" aria-hidden="true" />
+        <div className="sh-hero-scrim" aria-hidden="true" />
         <div className="sh-hero-inner">
 
-          <div className="sh-hero-left">
-            <div className="sh-eyebrow-row reveal">
-              <span className="section-label">Privacy-First Software Studio</span>
-            </div>
-            <h1 className="sh-headline reveal" style={{ '--d': '.05s' }}>
-              Software grown<br />
-              for <em>people,</em><br />
-              not advertisers
-            </h1>
-            <p className="sh-sub reveal" style={{ '--d': '.12s' }}>
-              We build apps with one rule: what you give us stays between us.
-              No ads. No tracking. No data sales. Ever.
-            </p>
-            <div className="sh-hero-actions reveal" style={{ '--d': '.18s' }}>
-              <Link to="/garden" className="cta-pill cta-pill--filled">Explore Products →</Link>
-              <Link to="/about" className="cta-pill">Our Ethos</Link>
-            </div>
-            <div className="sh-trust reveal" style={{ '--d': '.24s' }}>
-              <span>Zero trackers</span>
-              <span>Encrypted by default</span>
-              <span>Solo craft studio</span>
-            </div>
-          </div>
+          <p className="sh-kicker reveal">
+            <span className="sh-kicker-rule" aria-hidden="true" />
+            Privacy-First Software Studio
+          </p>
 
-          <div className="sh-hero-right reveal" style={{ '--d': '.1s' }} aria-hidden="true">
-            <div className="sh-float-card sh-float-card--1">
-              <span className="sh-float-label">Product 01 · Finance</span>
-              <h3 className="sh-float-name">Garden</h3>
-              <p className="sh-float-desc">
-                Your finances, end-to-end encrypted. We can’t see your data. Only you can.
+          <h1 className="sh-headline reveal" style={{ '--d': '.05s' }}>
+            Software grown for <em>people,</em> not advertisers.
+          </h1>
+
+          <div className="sh-hero-foot">
+            <div className="sh-hero-lead reveal" style={{ '--d': '.12s' }}>
+              <p className="sh-sub">
+                We build apps with one rule: what you give us stays between us.
+                No ads. No tracking. No data sales. Ever.
               </p>
-              <span className="sh-badge sh-badge--live">Live</span>
+              <div className="sh-hero-actions">
+                <Link to="/garden" className="cta-pill cta-pill--filled">Explore the Garden →</Link>
+                <Link to="/about" className="cta-pill">Our Ethos</Link>
+              </div>
             </div>
-            <div className="sh-float-card sh-float-card--2">
-              <span className="sh-float-label">Product 02 · Unknown</span>
-              <h3 className="sh-float-name sh-float-name--dim">Emerald</h3>
-              <p className="sh-float-desc">Something is taking root.</p>
-              <span className="sh-badge sh-badge--soon">Soon</span>
+
+            <div className="sh-hero-aside reveal" style={{ '--d': '.18s' }} aria-hidden="true">
+              <svg className="sh-sprig" viewBox="0 0 120 200" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M60 196 V40" />
+                <path d="M60 120 C36 120 20 102 18 78 44 78 60 96 60 120Z" />
+                <path d="M60 96 C84 96 100 78 102 54 76 54 60 72 60 96Z" />
+                <path d="M60 74 C40 74 26 58 24 38 48 38 60 54 60 74Z" />
+                <circle cx="60" cy="32" r="12" />
+                <path d="M60 20 v-8 M48 32 h-8 M72 32 h8 M51 23 l-6-6 M69 23 l6-6 M51 41 l-6 6 M69 41 l6 6" />
+              </svg>
+              <p className="sh-fieldnote">
+                No. 01 / Field Notes
+                <strong>Encrypted by default</strong>
+              </p>
             </div>
           </div>
+        </div>
 
+        {/* editorial product shelf */}
+        <div className="sh-shelf">
+          <Link to="/garden" className="sh-shelf-row">
+            <span className="sh-shelf-name">Garden</span>
+            <span className="sh-shelf-tag">01 · Finance · Live</span>
+          </Link>
+          <Link to="/emerald" className="sh-shelf-row sh-shelf-row--dim">
+            <span className="sh-shelf-name">Emerald</span>
+            <span className="sh-shelf-tag">02 · Unknown · Soon</span>
+          </Link>
         </div>
       </section>
-
-      {/* ── TICKER ── */}
-      <div className="sh-ticker" aria-hidden="true">
-        <div className="sh-ticker-track">
-          {tickerItems.map((item, i) => (
-            <span key={i} className="sh-ticker-item">{item}</span>
-          ))}
-        </div>
-      </div>
 
       {/* ── MANIFESTO ── */}
       <section className="sh-manifesto">

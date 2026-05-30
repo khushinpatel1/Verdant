@@ -9,7 +9,7 @@ const links = [
   { to: '/team',    label: 'Team' },
 ]
 
-const darkRoutes = ['/garden', '/emerald', '/about', '/team']
+const darkRoutes = ['/emerald', '/about', '/team']
 
 export default function Nav() {
   const [open, setOpen] = useState(false)

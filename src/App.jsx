@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Nav from './components/Nav.jsx'
+import FluidBackground from './components/FluidBackground.jsx'
 import Studio from './pages/Studio.jsx'
 import Garden from './pages/Garden.jsx'
 import Emerald from './pages/Emerald.jsx'
@@ -16,6 +17,7 @@ function Shell() {
 
   return (
     <>
+      <FluidBackground />
       <Nav />
       <Routes>
         <Route path="/" element={<Studio />} />

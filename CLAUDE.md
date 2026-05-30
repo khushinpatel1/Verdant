@@ -25,11 +25,21 @@ people, not advertisers"). A single-page React app, client-side routed.
 - `src/index.css` — ALL styles, design tokens at `:root`. This file is large; edit it
   surgically, never rewrite it whole.
 
+## The muse — the Japanese garden (company-wide)
+Verdant's core inspiration, threading every project: **the Japanese garden.** Moon + flower,
+green, stillness. **Serenity, meditation, peace of mind. Subtle, but efficient** — meticulously
+composed yet effortless; nothing extra, everything intentional. Stillness with life moving
+slowly underneath (water, moonlight). When in doubt, ask: *does this feel like a Japanese
+garden?* Palette: moonlight whites/creams, moss greens, earthy browns.
+
 ## Visual direction
 Organic, asymmetric, layered. Watercolor logic — colors bleed at edges, elements overlap.
 Never a clean grid. Never default AI symmetry. Multiple depths. Imperfection is intentional.
-Think **Diablo III art direction specifically** — the painterly, saturated, hand-illustrated
-look it was *criticized* for, not the franchise's gothic tone. The world feels grown, not designed.
+The current site language is **"Blend"** — editorial-botanical with gallery restraint
+(big Newsreader serif, flat cream paper, hairline rules, hand/painted botanical accents, a
+muted watercolor-fluid background that whispers). **Never reintroduce the old AI tells:**
+glassmorphism/frosted cards, gradient "blob" backgrounds, pill status badges, uniform fat
+radii + soft shadows, decorative tickers. The world feels grown, not designed.
 
 ## Typography (CSS vars in `src/index.css`)
 - `--ff-display`: **Newsreader** — headlines. Editorial high-contrast serif, composed (not whimsical).
