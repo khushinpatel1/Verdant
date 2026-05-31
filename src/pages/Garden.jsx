@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
+import MuseImage from '../components/MuseImage.jsx'
 
 /* Real captures of the live Garden app, each shot under a different theme + font
    to show off the customization. (Captured from the running prototype.) */
@@ -53,6 +54,7 @@ export default function Garden() {
 
       {/* ── HERO ── */}
       <section className="garden-hero">
+        <MuseImage src="/art/garden-pond.jpg" tone="light" side="right" />
         <div className="garden-hero-scrim" aria-hidden="true" />
         <div className="garden-hero-inner">
 

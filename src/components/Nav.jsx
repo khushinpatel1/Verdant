@@ -9,6 +9,8 @@ const links = [
 ]
 
 // Pages with a dark background behind the nav — nav text stays cream (light).
+// NOTE: '/team' (forest hero) is light, but '/team/:slug' profiles sit on light
+// parchment, so they must NOT be light — cream nav on parchment is invisible.
 const darkRoutes = ['/emerald', '/about', '/team']
 
 export default function Nav() {
@@ -16,7 +18,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
 
-  const isLight = darkRoutes.some(r => pathname === r) || pathname.startsWith('/team/')
+  const isLight = darkRoutes.some(r => pathname === r)
 
   useEffect(() => { setOpen(false) }, [pathname])
 

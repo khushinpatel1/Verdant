@@ -33,21 +33,17 @@ export default function Profile() {
       <div className="profile-inner">
 
         <div className="profile-left">
-          <div className="profile-photo-wrap">
-            <svg
-              className="profile-photo-deco"
-              viewBox="0 0 320 400"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <ellipse cx="155" cy="200" rx="130" ry="170" fill="#C8D5B9" opacity="0.4" />
-              <ellipse cx="210" cy="155" rx="85" ry="110" fill="#7A9E7E" opacity="0.2" />
-            </svg>
-            <div className="profile-photo">
-              <span className="profile-photo-placeholder">{person.initials}</span>
-            </div>
-          </div>
+          <figure className="profile-plate">
+            <span className="profile-plate-mat">
+              <span className="profile-plate-field">
+                <span className="profile-plate-monogram" aria-hidden="true">{person.initials}</span>
+              </span>
+            </span>
+            <figcaption className="profile-plate-cap">
+              <span>Plate 01</span>
+              <span>{person.title}</span>
+            </figcaption>
+          </figure>
           <h1 className="profile-name">{person.name}</h1>
           <p className="profile-title">{person.title}</p>
         </div>

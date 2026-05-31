@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
+import MuseImage from '../components/MuseImage.jsx'
 
 /* Upcoming roles — framed as plots in the garden, waiting to be planted.
    Reads as intentional growth, not an empty team page. */
@@ -12,6 +13,7 @@ export default function Team() {
   return (
     <main>
       <section className="team-hero">
+        <MuseImage src="/art/team-flower.jpg" tone="dark" side="right" />
         <span className="section-label section-label--light reveal">The Studio</span>
         <h1 className="team-hero-headline reveal" style={{ '--d': '.05s' }}>
           The people behind<br /><em>the work.</em>
@@ -23,14 +25,21 @@ export default function Team() {
       </section>
 
       <section className="team-roster">
-        {/* Featured founder — the planted plot */}
+        {/* Featured founder — a framed plate, hung on the paper, not a floating card */}
         <Link to="/team/kp" className="team-feature reveal">
-          <div className="team-feature-portrait">
-            <span className="team-feature-initials">KP</span>
-            <span className="team-feature-no" aria-hidden="true">01</span>
-          </div>
+          <figure className="team-portrait">
+            <span className="team-portrait-mat">
+              <span className="team-portrait-field">
+                <span className="team-portrait-monogram" aria-hidden="true">KP</span>
+              </span>
+            </span>
+            <figcaption className="team-portrait-cap">
+              <span>Plate 01</span>
+              <span>Founder</span>
+            </figcaption>
+          </figure>
           <div className="team-feature-body">
-            <span className="team-feature-role">Founder · Plot 01</span>
+            <span className="team-feature-role">The planted plot</span>
             <h2 className="team-feature-name">KP</h2>
             <p className="team-feature-bio">
               Building Verdant — privacy-first products, made slowly and meant to be

@@ -1,6 +1,9 @@
+import MuseImage from '../components/MuseImage.jsx'
+
 export default function Emerald() {
   return (
     <main className="emerald-page">
+      <MuseImage src="/art/emerald-dusk.jpg" tone="dark" side="center" />
       <div className="emerald-glow" aria-hidden="true" />
       <div className="emerald-shape" aria-hidden="true" />
       <div className="emerald-vignette" aria-hidden="true" />

@@ -1,4 +1,5 @@
 import Footer from '../components/Footer.jsx'
+import MuseImage from '../components/MuseImage.jsx'
 
 const DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 const MONTHS = [
@@ -49,6 +50,7 @@ export default function Ethos() {
   return (
     <main>
       <section className="ethos-manifesto">
+        <MuseImage src="/art/ethos-sand.jpg" tone="dark" side="right" />
         <div className="ethos-manifesto-inner">
           <span className="section-label section-label--light reveal">Ethos</span>
           <h1 className="ethos-manifesto-headline reveal" style={{ '--d': '.05s' }}>
