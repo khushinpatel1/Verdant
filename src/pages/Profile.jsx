@@ -36,6 +36,9 @@ export default function Profile() {
           <figure className="profile-plate">
             <span className="profile-plate-mat">
               <span className="profile-plate-field">
+                {/* TODO (next build): replace this initials monogram with a real headshot
+                    <img> in the same framed plate — reads as placeholder otherwise.
+                    See the /vinita page for the pattern. Tracked in memory/batch-b-plan. */}
                 <span className="profile-plate-monogram" aria-hidden="true">{person.initials}</span>
               </span>
             </span>
