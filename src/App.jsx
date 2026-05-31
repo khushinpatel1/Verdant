@@ -8,7 +8,6 @@ import Emerald from './pages/Emerald.jsx'
 import Ethos from './pages/Ethos.jsx'
 import Team from './pages/Team.jsx'
 import Profile from './pages/Profile.jsx'
-import Vinita from './pages/Vinita.jsx'
 import { useReveal } from './useReveal.js'
 
 function Shell() {
@@ -35,11 +34,7 @@ function Shell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Private, unlinked — Vinita's standalone page, outside the studio shell */}
-        <Route path="/vinita" element={<Vinita />} />
-        <Route path="/*" element={<Shell />} />
-      </Routes>
+      <Shell />
     </BrowserRouter>
   )
 }
