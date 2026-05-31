@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Scroll-scene system — base styles for the GSAP/Lenis layer primitives.
+   Tokens come from :root in index.css; never hardcode hex here.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Lenis: let the library own scroll height + smoothing */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* A scene is a positioning context for its stacked layers. */
+.scene {
+  position: relative;
+  overflow: clip; /* contain parallax overshoot, keep horizontal scroll dead */
+}
+
+/* Depth layers stack; absolutely-positioned ones are placed by the page CSS. */
+.layer {
+  will-change: transform, opacity, filter;
+}
+
+/* Full-bleed media (the AI still / video) that fills its layer box. */
+.media-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.media-layer__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Chrome-style modular card. Tone = palette background token. */
+.panel {
+  position: relative;
+  overflow: hidden;
+  transform-origin: center 70%;
+  will-change: transform, border-radius;
+}
+.panel--cream {
+  background: var(--cream);
+}
+.panel--forest {
+  background: var(--forest-800);
+  color: var(--cream);
+}
+.panel--terra {
+  background: var(--terra);
+  color: var(--cream);
+}
+.panel--sage {
+  background: var(--sage);
+}
+
+/* Firefly canvas — pointer-transparent top-note over a scene. */
+.fireflies {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer,
+  .panel,
+  .media-layer__media {
+    will-change: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Studio hero — layered scroll scene (overrides legacy .sh-hero layout)
+   ═══════════════════════════════════════════════════════════════════ */
+.studio .sh-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(5rem, 12vh, 9rem) clamp(1.5rem, 6vw, 6rem);
+}
+
+/* deepest painting layer */
+.studio .sh-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+/* fallback wash so the hero reads intentionally before the still is dropped in */
+.studio .sh-hero-bg .media-layer {
+  background: linear-gradient(160deg, var(--sage-soft), var(--moss) 70%, var(--forest-800));
+}
+
+/* cream legibility wash, weighted to the upper-left where the copy sits */
+.studio .sh-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(120% 90% at 18% 32%, var(--cream) 0%, rgba(251, 248, 242, 0.55) 34%, rgba(251, 248, 242, 0) 62%),
+    linear-gradient(180deg, rgba(251, 248, 242, 0) 60%, rgba(251, 248, 242, 0.6) 100%);
+  pointer-events: none;
+}
+
+.studio .sh-hero-flies {
+  z-index: 3;
+}
+
+/* foreground copy rides above everything */
+.studio .sh-hero-inner {
+  position: relative;
+  z-index: 4;
+  will-change: transform, opacity;
+}
+.studio .sh-shelf {
+  position: relative;
+  z-index: 4;
+}
+
+/* Products: Panel is the animated card surface; the Link rides inside it. */
+.studio .sh-products-grid {
+  align-items: stretch;
+}
+.studio .sh-product-panel {
+  display: flex;
+}
+.studio .sh-product-panel > .sh-pcard {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  box-shadow: none;
+  border-radius: inherit;
+}

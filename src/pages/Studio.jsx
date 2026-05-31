@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
+import ScrollScene from '../scroll/ScrollScene.jsx'
+import Layer from '../scroll/Layer.jsx'
+import MediaLayer from '../scroll/MediaLayer.jsx'
+import Fireflies from '../scroll/Fireflies.jsx'
+import Panel from '../scroll/Panel.jsx'
 
 const icons = {
   seed: (
@@ -41,16 +46,35 @@ const seasons = [
 
 export default function Studio() {
   return (
-    <main>
+    <main className="studio">
 
-      {/* ── HERO ── */}
-      <section className="sh-hero">
+      {/* ── HERO ── layered scroll scene ── */}
+      <ScrollScene className="sh-hero" height={120}>
+        {/* deepest layer: the moonlit-garden still (video upgrades it later) */}
+        <Layer
+          className="sh-hero-bg"
+          from={{ yPercent: 0, scale: 1.08 }}
+          to={{ yPercent: 12, scale: 1.16 }}
+        >
+          <MediaLayer
+            poster="/scenes/hero-moon.jpg"
+            alt="A moonlit Japanese garden reflected in a still pond"
+            objectPosition="center 42%"
+          />
+        </Layer>
+
+        {/* cream wash keeps the copy legible over the painting */}
         <div className="sh-hero-scrim" aria-hidden="true" />
-        <figure className="sh-plum" aria-hidden="true">
-          <img className="sh-plum-img" src="/art/plum-moon-web.jpg" alt="" loading="eager" decoding="async" />
-        </figure>
-        <div className="sh-hero-inner">
 
+        {/* live top-note: drifting motes, not baked into the video */}
+        <Fireflies count={16} className="sh-hero-flies" />
+
+        {/* foreground copy: rises faster, softens as you scroll past */}
+        <Layer
+          className="sh-hero-inner"
+          from={{ yPercent: 0, autoAlpha: 1 }}
+          to={{ yPercent: -28, autoAlpha: 0.5 }}
+        >
           <p className="sh-kicker reveal">
             <span className="sh-kicker-rule" aria-hidden="true" />
             Privacy-First Software Studio
@@ -79,7 +103,7 @@ export default function Studio() {
               </p>
             </div>
           </div>
-        </div>
+        </Layer>
 
         {/* editorial product shelf */}
         <div className="sh-shelf">
@@ -92,7 +116,7 @@ export default function Studio() {
             <span className="sh-shelf-tag">02 · Unknown · Soon</span>
           </Link>
         </div>
-      </section>
+      </ScrollScene>
 
       {/* ── MANIFESTO ── */}
       <section className="sh-manifesto">
@@ -175,31 +199,35 @@ export default function Studio() {
           <h2 className="sh-products-label reveal">The Work</h2>
           <div className="sh-products-grid">
 
-            <Link to="/garden" className="sh-pcard reveal">
-              <div className="sh-pcard-top">
-                <span className="sh-pcard-eyebrow">Product 01 · Finance</span>
-                <span className="sh-badge sh-badge--live sh-badge--sm">Live</span>
-              </div>
-              <h3 className="sh-pcard-name">Garden</h3>
-              <p className="sh-pcard-desc">
-                A finance app that treats your money like a living system. Watch it grow, prune
-                what doesn’t serve you, plant for the long season.
-              </p>
-              <span className="sh-pcard-cta">Plant a Seed →</span>
-            </Link>
+            <Panel tone="cream" className="sh-product-panel">
+              <Link to="/garden" className="sh-pcard reveal">
+                <div className="sh-pcard-top">
+                  <span className="sh-pcard-eyebrow">Product 01 · Finance</span>
+                  <span className="sh-badge sh-badge--live sh-badge--sm">Live</span>
+                </div>
+                <h3 className="sh-pcard-name">Garden</h3>
+                <p className="sh-pcard-desc">
+                  A finance app that treats your money like a living system. Watch it grow, prune
+                  what doesn’t serve you, plant for the long season.
+                </p>
+                <span className="sh-pcard-cta">Plant a Seed →</span>
+              </Link>
+            </Panel>
 
-            <Link to="/emerald" className="sh-pcard sh-pcard--offset reveal" style={{ '--d': '.08s' }}>
-              <div className="sh-pcard-top">
-                <span className="sh-pcard-eyebrow">Product 02 · Unknown</span>
-                <span className="sh-badge sh-badge--soon sh-badge--sm">Soon</span>
-              </div>
-              <h3 className="sh-pcard-name sh-pcard-name--dim">Emerald</h3>
-              <p className="sh-pcard-desc">
-                Something is taking root. We’re not ready to say what yet — but it’s growing
-                in the right direction.
-              </p>
-              <span className="sh-pcard-cta">Watch this space →</span>
-            </Link>
+            <Panel tone="cream" className="sh-product-panel sh-product-panel--offset">
+              <Link to="/emerald" className="sh-pcard sh-pcard--offset reveal" style={{ '--d': '.08s' }}>
+                <div className="sh-pcard-top">
+                  <span className="sh-pcard-eyebrow">Product 02 · Unknown</span>
+                  <span className="sh-badge sh-badge--soon sh-badge--sm">Soon</span>
+                </div>
+                <h3 className="sh-pcard-name sh-pcard-name--dim">Emerald</h3>
+                <p className="sh-pcard-desc">
+                  Something is taking root. We’re not ready to say what yet — but it’s growing
+                  in the right direction.
+                </p>
+                <span className="sh-pcard-cta">Watch this space →</span>
+              </Link>
+            </Panel>
 
           </div>
         </div>
