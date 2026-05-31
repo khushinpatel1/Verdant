@@ -91,7 +91,7 @@ export default function Studio() {
                 No ads. No tracking. No data sales. Ever.
               </p>
               <div className="sh-hero-actions">
-                <Link to="/garden" className="cta-pill cta-pill--filled">Explore the Garden →</Link>
+                <Link to="/garden" className="cta-pill">Explore the Garden →</Link>
                 <Link to="/about" className="cta-pill">Our Ethos</Link>
               </div>
             </div>

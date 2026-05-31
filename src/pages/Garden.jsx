@@ -74,7 +74,7 @@ export default function Garden() {
                 your shoulder — not even us.
               </p>
               <div className="garden-hero-actions">
-                <a href="#waitlist" className="cta-pill cta-pill--filled">Plant a Seed →</a>
+                <a href="#waitlist" className="cta-pill">Plant a Seed →</a>
                 <Link to="/about" className="cta-pill">Our Ethos</Link>
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function Garden() {
               placeholder="your@email.com"
               aria-label="Email address"
             />
-            <button type="submit" className="cta-pill cta-pill--filled">Plant a Seed</button>
+            <button type="submit" className="cta-pill">Plant a Seed</button>
           </form>
           <p className="garden-footer-note">End-to-end encrypted. Verdant cannot see your data.</p>
         </div>
