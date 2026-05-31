@@ -6,6 +6,12 @@
         "hooks": [
           {
             "type": "command",
+            "command": "bash .claude/plan-archival.sh 2>/dev/null",
+            "timeout": 5,
+            "statusMessage": "Archiving completed plans..."
+          },
+          {
+            "type": "command",
             "command": "cd \"$(pwd)\" 2>/dev/null && pending=$(find ./.claude/plans -name '*.md' -type f 2>/dev/null | xargs grep -l 'PENDING\\|IN PROGRESS' 2>/dev/null | sed 's|^.*/||' | tr '\\n' ',' | sed 's/,$//' 2>/dev/null); if [ -n \"$pending\" ]; then echo \"{\\\"systemMessage\\\":\\\"📋 Outstanding work in plans: $pending\\\", \\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"SessionStart\\\"}}\"; else echo '{}'; fi",
             "timeout": 5,
             "statusMessage": "Checking work-in-progress status..."
