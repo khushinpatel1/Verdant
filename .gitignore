@@ -42,3 +42,9 @@ next-env.d.ts
 
 # build output (Cloudflare builds from source)
 /dist
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
